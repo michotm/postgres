@@ -21,7 +21,9 @@ services:
       - "-c"
       - "wal_level=replica"
       - "-c"
-      - "archive_command='barman-wal-archive $BARMAN_HOST $BARMAN_CONFIG_NAME %p'"
+      - "archive_command='barman-wal-archive -U postgres $BARMAN_HOST $BARMAN_CONFIG_NAME /var/lib/postgresql/data/%p'"
+    ports:
+      - "5432:5432"
     volumes:
       - .db/:/var/lib/postgresql/data
     networks:
